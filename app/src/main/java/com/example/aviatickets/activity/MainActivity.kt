@@ -1,23 +1,21 @@
 package com.example.aviatickets.activity
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.aviatickets.R
 import com.example.aviatickets.databinding.ActivityMainBinding
 import com.example.aviatickets.fragment.OfferListFragment
+// MainActivity.kt
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container_view, OfferListFragment.newInstance())
-            .commit()
-
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, OfferListFragment())
+                .commit()
+        }
     }
 }
